@@ -16,7 +16,7 @@
 
 <img width="168" alt="image" src="https://github.com/user-attachments/assets/225e31c9-98ca-417a-b8a0-ddddf88004ae" />
 
-> **A** is an empty GameObject that houses the Camera (**B**) and a Canvas housing the Crosshair UI (**C**). Anything to do with the Player and UI will be in here.
+> **A** is an empty GameObject that houses the Camera (**B**) and a Canvas parented to the Crosshair UI (**C**). Anything to do with the Player and UI will be in here.
 
 
 ### We'll start by creating the Ammo UI
@@ -29,7 +29,7 @@
 
 3. Right click `Bullet UI` -> `UI` -> `Image`, rename as 'Bullet'.
 
-4. Drag and drop your bullet and empty png's to the `assets` window. For both png's and change the `Texture Type` from 'Default' to 'Sprite (2D and UI). Scroll down and click `Apply`.
+4. Drag and drop your bullet and empty png's to the `assets` window. For both png's you'll need to change the `Texture Type` from 'Default' to 'Sprite (2D and UI). Scroll down and click `Apply`.
 
 ![image](https://github.com/user-attachments/assets/d8047131-c4bb-4773-bf1a-ac8404208b61)
 
@@ -37,10 +37,10 @@
 
 5. Click your Bullet GameObject in `Heirarchy` and drag your bullet image to `Source Image`. Click the `Set Native Size` button below. You can check the position and size of your image by clicking on `Game` in the top left. Scale and position it however you like. To create more, click on `Bullet` and press Ctrl + D to duplicate.
 
-![image](https://github.com/user-attachments/assets/fc0f6c5b-41c9-4390-b9c1-1ee332ec5249)
+<img width="960" alt="image" src="https://github.com/user-attachments/assets/28ceda51-e87a-4878-9457-b9d5dfc6bb9d" />
 
 
-### Next we'll make the display script
+### Next we'll make the UI Script
 
 1. Right Click in the `Assets` window, -> `Create` -> `C# Script` and name the script 'AmmoDisplay'. Double click to open in VisualStudio.
 
@@ -64,7 +64,7 @@
 
 ![image](https://github.com/user-attachments/assets/643c8a44-e41b-4dda-966d-e29930e6ddcb)
 
-4. Save with Ctrl + S and return to Unity. Right click `Bullet UI` -> `Create Empty Parent`, F2 and rename 'Gun' or something similar.
+4. Save with Ctrl + S and return to Unity. Right click `Bullet UI` -> `Create Empty Parent`, F2 and rename 'Gun'.
 
 5. Drag and drop your AmmoDisplay script onto `Gun`. It should look something like this:
 
@@ -75,11 +75,12 @@
 7. If you click the arrow besides `Bullets` under the `Ammo Dispaly (Script)`, you'll see a box that says the List is empty. You can mass import your Images by clicking the lock icon in the top right of the `Inspector`, shift click your bullets in `Heirarchy` and drag them to the indicated space.
 
 <img width="431" alt="image" src="https://github.com/user-attachments/assets/10c6dc73-38a9-4185-8cd7-c0064ff7ea8f" />
+
 ![image](https://github.com/user-attachments/assets/22138793-329e-4143-bab1-c2ae874e1520)
 > This ensures the order remains the same
 
 
-### How we need to add the shooting part of the script
+### Now we need to add the shooting part of the script
 
 1. Return to AmmoDisplay in VisualStudio. Under the array, let's add a bool--which is a true or false statement. Type `public bool isFiring;`
 
@@ -148,6 +149,8 @@
             reloadAmmo();
             return;
         }`
+
+![image](https://github.com/user-attachments/assets/3f91c729-f77d-41ad-bdee-e4884e58d43c)
 
 6. Save your script and return to Unity.
   
