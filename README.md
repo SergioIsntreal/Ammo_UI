@@ -3,7 +3,7 @@
 ### In this tutorial, we will be making an ammo UI, in which each bullet is physically displayed on screen, and disappears when you fire. We will also be programming a reload mechanic.
 
 > [!IMPORTANT]
-> In this tutorial, you will need any version of Unity and VisualStudio released within the last 5 years
+> You will need any version of Unity and VisualStudio released within the last 5 years
 > 
 > This tutorial is made for a 3D Project
 > 
