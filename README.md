@@ -40,6 +40,118 @@
 ![image](https://github.com/user-attachments/assets/fc0f6c5b-41c9-4390-b9c1-1ee332ec5249)
 
 
-### Now let's make the display script
+### Next we'll make the display script
+
+1. Right Click in the `Assets` window, -> `Create` -> `C# Script` and name the script 'AmmoDisplay'. Double click to open in VisualStudio.
+
+2. We need to add the UI library, so Hit `Enter` on **Line 3** and type in `using UnityEngine.UI;`.
+
+3. Under `public class`, insert the following:
+
+   `public int ammo;`
+   `public int maxAmmo;`
+   > public means you can edit the numbers from Unity
+
+   `public Sprite emptyRound;`
+   `public Sprite fullRound;`
+   > this allows you to drag and drop sprites within Unity
+
+   `public Image[] bullets;`
+   > [] is an array, which allows you to drag and drop multiple gameObjects within Unity
+
+> [!NOTE]
+> GameObject must be an **IMAGE** and not a **RAW IMAGE**
+
+![image](https://github.com/user-attachments/assets/643c8a44-e41b-4dda-966d-e29930e6ddcb)
+
+4. Save with Ctrl + S and return to Unity. Right click `Bullet UI` -> `Create Empty Parent`, F2 and rename 'Gun' or something similar.
+
+5. Drag and drop your AmmoDisplay script onto `Gun`. It should look something like this:
+
+![image](https://github.com/user-attachments/assets/1cf9cc59-85d1-4ec5-bd0c-8d8904b7c344)
+
+6. Set Ammo and Max Ammo to the number of bullets you have displayed on your UI. Then, drag and drop your bullet sprite to `Full Round` and the empty png to `Empty Round`.
+
+7. If you click the arrow besides `Bullets` under the `Ammo Dispaly (Script)`, you'll see a box that says the List is empty. You can mass import your Images by clicking the lock icon in the top right of the `Inspector`, shift click your bullets in `Heirarchy` and drag them to the indicated space.
+
+<img width="431" alt="image" src="https://github.com/user-attachments/assets/10c6dc73-38a9-4185-8cd7-c0064ff7ea8f" />
+![image](https://github.com/user-attachments/assets/22138793-329e-4143-bab1-c2ae874e1520)
+> This ensures the order remains the same
 
 
+### How we need to add the shooting part of the script
+
+1. Return to AmmoDisplay in VisualStudio. Under the array, let's add a bool--which is a true or false statement. Type `public bool isFiring;`
+
+2. Under `void Update()`, type in the following:
+
+   `if (Input.GetMouseButtonDown(0) && !isFiring && ammo > 0)
+   {
+        isFiring = true;
+        ammo--;
+        isFiring = false;
+   }`
+
+> `Input.GetMouseButtonDown(0)` is Left Mouse Button (you can assign any button you want really). `&&` seems to imply all of the requirements need to be met for the if statement to work. The last three lines are to ensure you only lose 1 ammo per click, rather than continuously.
+
+3. The next part of the script will ensure that the full and empty bullet sprites are shown accordingly. Type in:
+
+   `for (int i = 0; i < bullets.Length; i++)
+   {
+        if (i < ammo)
+        {
+            bullets[i].sprite = fullRound;
+        }
+        else
+        {
+            bullets[i].sprite = emptyRound;
+        }`
+> If ammo is above 0, it displays a bullet, otherwise it displays an empty round.
+
+ `      if (i < maxAmmo)
+        {
+            bullets[i].enabled = true;
+        }
+        else
+        {
+            bullets[i].enabled = false;
+        }`
+> (I think) This determines which bullets in the array are displayed, based on your ammo count.
+
+4. Save your script and return to Unity.
+
+
+### If you run your project with the script showing in the `Inspector`, you'll see that the ammo count goes down when you click (or press the allocated button). However, there's no way to replenish bullets...
+### Let's create a Reload script
+
+1. Right Click in the `Assets` window, -> `Create` -> `C# Script` and name the script 'Reload'. Double click to open in VisualStudio.
+
+2. Hit `Enter` on **Line 3** and type in `using UnityEditor;`.
+
+3. We're going to add a line under `public class` that allows this script to communicate with the AmmoDisplay script.
+
+   `public AmmoDisplay ammoDisplay;`
+
+4. Below this, we're going to create a void, which is a return function (no, I don't know what that means).
+
+   `void reloadAmmo
+   {
+       int maxAmmo = 6;
+       ammoDisplay.ammo = maxAmmo;
+   }`
+   > Where I've put 6, you will put your max ammo number.
+
+5. Under `void Update()`, we're going to assign the reload function to a button. I'm going to assign it to space bar, but you can insert whichever key you want.
+
+   `if (Input.GetKey("space"))
+        {
+            reloadAmmo();
+            return;
+        }`
+
+6. Save your script and return to Unity.
+  
+7. Drag and drop your Reload script onto `Gun`. Set `Ammo Display` to `Gun (Ammo Display)` and save.
+
+
+### Run your game and now you should be able to reload.
